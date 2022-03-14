@@ -195,6 +195,9 @@ package("qt5base")
         end
 
         package:data_set("qt", qt_table(installdir, versionstr))
+
+        print(os.files(path.join(package:installdir(), "**.a")))
+        print(os.files(path.join(package:installdir(), "**.so")))
     end)
 
     on_test(function (package)

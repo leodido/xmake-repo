@@ -55,8 +55,6 @@ package("qt5lib")
 
         table.insert(links, 1, linkname)
 
-        print(os.files(path.join(package:installdir(), "**.a")))
-        print(os.files(path.join(package:installdir(), "**.so")))
         return {
             qtdir = qt,
             version = qt.version,

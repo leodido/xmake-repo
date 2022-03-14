@@ -15,7 +15,7 @@ package("qt5network")
         package:base():script("load")(package)
         package:set("kind", "library")
     end)
-
+ 
     on_test(function (package)
         local cxflags
         if not package:is_plat("windows") then
