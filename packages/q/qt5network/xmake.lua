@@ -11,7 +11,7 @@ package("qt5network")
         elseif package:is_plat("iphoneos") then
             package:data_set("frameworks", {"GSS", "IOKit", "Security", "SystemConfiguration"})
         end
-    
+
         package:base():script("load")(package)
         package:set("kind", "library")
     end)
@@ -24,7 +24,7 @@ package("qt5network")
         assert(package:check_cxxsnippets({test = [[
             int test(int argc, char** argv) {
                 QCoreApplication app(argc, argv);
-          
+
                 QByteArray datagram = "Hello from xmake!";
                 QUdpSocket udpSocket;
                 udpSocket.writeDatagram(datagram, QHostAddress::Broadcast, 45454);
