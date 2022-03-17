@@ -7,7 +7,7 @@ package("magnum-integration")
     add_urls("https://github.com/mosra/magnum-integration/archive/refs/tags/$(version).zip",
              "https://github.com/mosra/magnum-integration.git")
     add_versions("v2020.06", "8e5d7ffc9df300eb9fac9cff24e74d40f9a13f5e952bd3185fb002d4d6ac38ed")
-
+ 
     local integrations = {"bullet", "dart", "eigen", "glm", "imgui", "ovr"}
     for _, integration in ipairs(integrations) do
         add_configs(integration, {description = "Build " .. integration .. " integration library.", default = (integration == "imgui"), type = "boolean"})
