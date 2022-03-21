@@ -12,7 +12,7 @@ package("magnum-integration")
     for _, integration in ipairs(integrations) do
         add_configs(integration, {description = "Build " .. integration .. " integration library.", default = (integration == "imgui"), type = "boolean"})
     end
-
+  
     add_deps("cmake", "magnum")
     on_load("windows", "linux", "macosx", function (package)
         local configdeps = {bullet = "bullet3",
