@@ -33,10 +33,6 @@ package("magnum-integration")
         for _, integration in ipairs(integrations) do
             table.insert(configs, "-DWITH_" .. integration:upper() .. "=" .. (package:config(integration) and "ON" or "OFF"))
         end
-        io.replace("src/Corrade/Utility/TweakableParser.cpp", "{value + 2, 16}", "{value.data() + 2, 16}", {plain = true})
-        io.replace("src/Corrade/Utility/TweakableParser.cpp", "{value + 2, 2}", "{value.data() + 2, 2}", {plain = true})
-        io.replace("src/Corrade/Utility/TweakableParser.cpp", "{value + 1, 8}", "{value.data() + 1, 8}", {plain = true})
-        io.replace("src/Corrade/Utility/TweakableParser.cpp", "{value, 10}", "{value.data(), 10}", {plain = true})
         import("package.tools.cmake").install(package, configs)
     end)
 
