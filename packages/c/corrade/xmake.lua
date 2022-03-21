@@ -15,15 +15,15 @@ package("corrade")
     end
     add_deps("cmake")
     on_install("windows", "linux", "macosx", function (package)
-        local configs = {"-DBUILD_TESTS=OFF", "-DLIB_SUFFIX=", "-DCMAKE_CXX_STANDARD=14"}
+        local configs = {"-DBUILD_TESTS=OFF", "-DLIB_SUFFIX="}
         table.insert(configs, "-DCMAKE_BUILD_TYPE=" .. (package:debug() and "Debug" or "Release"))
         table.insert(configs, "-DBUILD_STATIC=" .. (package:config("shared") and "OFF" or "ON"))
-        --[[
+        
         io.replace("src/Corrade/Utility/TweakableParser.cpp", "{value + 2, 16}", "{value.data() + 2, 16}", {plain = true})
         io.replace("src/Corrade/Utility/TweakableParser.cpp", "{value + 2, 2}", "{value.data() + 2, 2}", {plain = true})
         io.replace("src/Corrade/Utility/TweakableParser.cpp", "{value + 1, 8}", "{value.data() + 1, 8}", {plain = true})
         io.replace("src/Corrade/Utility/TweakableParser.cpp", "{value, 10}", "{value.data(), 10}", {plain = true})
-        ]]
+        
         import("package.tools.cmake").install(package, configs)
         package:addenv("PATH", "bin")
     end)
