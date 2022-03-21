@@ -27,12 +27,16 @@ package("magnum-integration")
     end)
 
     on_install("windows", "linux", "macosx", function (package)
-        local configs = {"-DBUILD_TESTS=OFF", "-DLIB_SUFFIX=", "-DCMAKE_CXX_STANDARD=14"}
+        local configs = {"-DBUILD_TESTS=OFF", "-DLIB_SUFFIX="}
         table.insert(configs, "-DCMAKE_BUILD_TYPE=" .. (package:debug() and "Debug" or "Release"))
         table.insert(configs, "-DBUILD_STATIC=" .. (package:config("shared") and "OFF" or "ON"))
         for _, integration in ipairs(integrations) do
             table.insert(configs, "-DWITH_" .. integration:upper() .. "=" .. (package:config(integration) and "ON" or "OFF"))
         end
+        io.replace("src/Corrade/Utility/TweakableParser.cpp", "{value + 2, 16}", "{value.data() + 2, 16}", {plain = true})
+        io.replace("src/Corrade/Utility/TweakableParser.cpp", "{value + 2, 2}", "{value.data() + 2, 2}", {plain = true})
+        io.replace("src/Corrade/Utility/TweakableParser.cpp", "{value + 1, 8}", "{value.data() + 1, 8}", {plain = true})
+        io.replace("src/Corrade/Utility/TweakableParser.cpp", "{value, 10}", "{value.data(), 10}", {plain = true})
         import("package.tools.cmake").install(package, configs)
     end)
 
